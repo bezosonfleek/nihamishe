@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nihamishe – Book a move, fixed price</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Figtree:wght@400;600&display=swap">
+<style>
+:root{
+  --ink:#14213d;--bg:#f6f8fb;--surface:#ffffff;--line:#d8dfeb;--muted:#51607a;--accent:#ffc400;--on-accent:#14213d;--field:#ffffff;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--ink:#eef2fa;--bg:#0f1730;--surface:#17213f;--line:#2b3963;--muted:#a3b0cc;--field:#0f1730}
+}
+:root[data-theme="dark"]{--ink:#eef2fa;--bg:#0f1730;--surface:#17213f;--line:#2b3963;--muted:#a3b0cc;--field:#0f1730}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 Figtree,system-ui,sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+h1,h2{font-family:"Bricolage Grotesque",Figtree,system-ui,sans-serif;line-height:1.05;margin:0}
+.hero{padding:48px 0 32px}
+.brand{font:800 20px "Bricolage Grotesque",sans-serif;background:var(--accent);color:var(--on-accent);display:inline-block;padding:4px 12px;border-radius:6px;margin-bottom:24px}
+h1{font-size:clamp(36px,9vw,60px);font-weight:800;letter-spacing:-.02em;max-width:14ch}
+.lead{font-size:18px;color:var(--muted);max-width:46ch;margin:16px 0 24px}
+.btn{display:inline-block;background:var(--accent);color:var(--on-accent);font:600 17px Figtree,sans-serif;border:0;border-radius:10px;padding:14px 22px;cursor:pointer;text-decoration:none}
+.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+section{padding:28px 0}
+h2{font-size:28px;font-weight:800;margin-bottom:14px}
+.table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.table td{padding:12px 14px;border-bottom:1px solid var(--line)}
+.table tr:last-child td{border-bottom:0}
+.table td:last-child{text-align:right;font-weight:600;white-space:nowrap}
+.note{color:var(--muted);font-size:14px;margin-top:8px}
+form{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;gap:14px}
+label{display:grid;gap:6px;font-weight:600;font-size:15px}
+input,select,textarea{font:400 16px Figtree,sans-serif;color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:8px;padding:11px 12px;width:100%}
+.row{display:grid;gap:14px;grid-template-columns:1fr 1fr}
+@media(max-width:520px){.row{grid-template-columns:1fr}}
+fieldset{border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:0}
+legend{font-weight:600;font-size:15px;padding:0 6px}
+.check{display:flex;gap:10px;align-items:center;font-weight:400;padding:4px 0}
+.check input{width:auto}
+.err{color:#c0392b;font-size:14px;min-height:1em}
+footer{padding:28px 0 40px;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="brand">Nihamishe</div>
+    <h1>Moving house? We’ll move you.</h1>
+    <p class="lead">Fixed prices, a confirmed time, and one WhatsApp message to book. Handcarts, bodas and pickups for rooms, bedsitters, hostels and apartments.</p>
+    <a class="btn" href="#book">Book a move</a>
+  </header>
+
+  <section>
+    <h2>Prices</h2>
+    <table class="table">
+      <tr><td>Small load (box, bag, mattress) by handcart or boda</td><td>from KES 300</td></tr>
+      <tr><td>Bedsitter or single room by pickup</td><td>from KES 1,500</td></tr>
+      <tr><td>One bedroom by pickup</td><td>from KES 2,500</td></tr>
+      <tr><td>Stairs, long distance, extra helpers</td><td>quoted on booking</td></tr>
+    </table>
+    <p class="note">Launch prices are a guide. We confirm your exact price on WhatsApp before you pay anything.</p>
+  </section>
+
+  <section id="book">
+    <h2>Book your move</h2>
+    <form id="f" novalidate>
+      <div class="row">
+        <label>Your name<input id="name" autocomplete="name" required></label>
+        <label>Phone number<input id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="07XX XXX XXX" required></label>
+      </div>
+      <div class="row">
+        <label>Moving from<input id="from" placeholder="Estate, building or hostel name, and gate or room" required></label>
+        <label>Moving to<input id="to" placeholder="Estate, building or town" required></label>
+      </div>
+      <div class="row">
+        <label>Move date<input id="date" type="date" required></label>
+        <label>Preferred time
+          <select id="time"><option>Morning (8am–12pm)</option><option>Afternoon (12pm–5pm)</option><option>Evening (5pm–8pm)</option></select>
+        </label>
+      </div>
+      <label>Size of move
+        <select id="size">
+          <option>Small load (boxes, bags, mattress)</option>
+          <option>Bedsitter or single room</option>
+          <option>One bedroom</option>
+          <option>Not sure</option>
+        </select>
+      </label>
+      <fieldset>
+        <legend>Big items</legend>
+        <label class="check"><input type="checkbox" value="Fridge"> Fridge</label>
+        <label class="check"><input type="checkbox" value="TV"> TV</label>
+        <label class="check"><input type="checkbox" value="Bed or sofa"> Bed or sofa</label>
+        <label class="check"><input type="checkbox" value="Cooker or gas"> Cooker or gas</label>
+      </fieldset>
+      <label>Anything else we should know?<textarea id="notes" rows="3" placeholder="Stairs, fragile items, a storage need…"></textarea></label>
+      <div class="err" id="err" role="alert"></div>
+      <button class="btn" type="submit">Send booking on WhatsApp</button>
+      <p class="note" style="margin:0">This opens WhatsApp with your details filled in. We reply to confirm the price and time. You pay a small deposit by M-Pesa to lock your slot.</p>
+    </form>
+  </section>
+
+  <footer>Nihamishe · Moves booked by WhatsApp</footer>
+</div>
+
+<script>
+// Replace with your WhatsApp Business number, in international format without + (e.g. 2547XXXXXXXX)
+var WA_NUMBER = "254700000000";
+
+document.getElementById("f").addEventListener("submit", function (e) {
+  e.preventDefault();
+  var v = function (id) { return document.getElementById(id).value.trim(); };
+  var err = document.getElementById("err");
+  var required = ["name", "phone", "from", "to", "date"];
+  for (var i = 0; i < required.length; i++) {
+    if (!v(required[i])) {
+      err.textContent = "Fill in your name, phone, pickup, drop-off and date to send the booking.";
+      document.getElementById(required[i]).focus();
+      return;
+    }
+  }
+  err.textContent = "";
+  var items = Array.prototype.map.call(
+    document.querySelectorAll("fieldset input:checked"), function (c) { return c.value; }
+  ).join(", ") || "None listed";
+  var msg = "Hi Nihamishe, I’d like to book a move.\n" +
+    "Name: " + v("name") + "\n" +
+    "Phone: " + v("phone") + "\n" +
+    "From: " + v("from") + "\n" +
+    "To: " + v("to") + "\n" +
+    "Date: " + v("date") + ", " + v("time") + "\n" +
+    "Size: " + v("size") + "\n" +
+    "Big items: " + items + "\n" +
+    "Notes: " + (v("notes") || "None");
+  window.open("https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg), "_blank");
+});
+</script>
+</body>
+</html>
